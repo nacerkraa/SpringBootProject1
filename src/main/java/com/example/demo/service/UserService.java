@@ -1,18 +1,24 @@
 package com.example.demo.service;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.demo.dao.User;
+import com.example.demo.repository.UserRepository;
 
 @Service
 public class UserService {
+	private final UserRepository userRepository;
+	
+	@Autowired
+	public UserService(UserRepository userRepository) {
+		this.userRepository = userRepository;
+		
+	}
+	
 	public List<User> index() {
-		User user = new User(1L,"nacer","kraa","nacer@gmail.com");
-		List<User> l = new ArrayList<User>();
-		l.add(user);
-		l.add(user);
-		return l;
+		return (List<User>) userRepository.findAll();
 	}
 
 }
